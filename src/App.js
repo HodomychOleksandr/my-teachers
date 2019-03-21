@@ -62,12 +62,13 @@ class Table extends React.Component {
     const items = this.props.items;
     return (
       <div id="Table">
-        <table>
+        <table className="table">
           <tbody>
             <tr>
-              <th>Ім'я, Прізвище</th>
-              <th>предмет</th>
-              <th>номер</th>
+              <th>Ім'я, прізвище</th>
+              <th>Предмет</th>
+              <th>Номер</th>
+              <th />
             </tr>
             {items.map(item => {
               return (
@@ -75,6 +76,9 @@ class Table extends React.Component {
                   <td>{item.name}</td>
                   <td>{item.subject}</td>
                   <td>{item.phoneNumber}</td>
+                  <td>
+                    <button className="btn btn-danger btn-sm">Delete</button>
+                  </td>
                 </tr>
               );
             })}
@@ -121,13 +125,22 @@ class Form extends React.Component {
               onChange={this.props.handleInputChange}
             />
           </label>
-          <button type="submit" value="Submit">
+          <button
+            className="btn btn-danger btn-sm"
+            type="submit"
+            value="Submit"
+          >
             Додати
           </button>
         </form>
       </div>
     );
   }
+  /*
+  componentDidUpdate() {
+    localStorage.setItem("items", JSON.stringify(this.state.items));
+  }
+  */
 }
 
 export default App;
