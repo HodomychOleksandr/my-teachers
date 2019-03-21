@@ -58,6 +58,11 @@ class App extends React.Component {
 }
 
 class Table extends React.Component {
+  handleDelete = item => {
+    const items = this.state.items.filter(m => m.subject !== items.subject);
+    this.setState({ items });
+  };
+
   render() {
     const items = this.props.items;
     return (
@@ -72,12 +77,17 @@ class Table extends React.Component {
             </tr>
             {items.map(item => {
               return (
-                <tr>
+                <tr key={item.subject}>
                   <td>{item.name}</td>
                   <td>{item.subject}</td>
                   <td>{item.phoneNumber}</td>
                   <td>
-                    <button className="btn btn-danger btn-sm">Delete</button>
+                    <button
+                      onClick={() => this.handleDelete(item)}
+                      className="btn btn-danger btn-sm"
+                    >
+                      Delete
+                    </button>
                   </td>
                 </tr>
               );
@@ -105,7 +115,7 @@ class Form extends React.Component {
               onChange={this.props.handleInputChange}
             />
           </label>
-          <label for="subject">
+          <label htmlFor="subject">
             Предмет:
             <input
               id="subject"
@@ -115,7 +125,7 @@ class Form extends React.Component {
               onChange={this.props.handleInputChange}
             />
           </label>
-          <label for="phoneNumber">
+          <label htmlFor="phoneNumber">
             Номер телефону:
             <input
               id="phoneNumber"
@@ -125,11 +135,7 @@ class Form extends React.Component {
               onChange={this.props.handleInputChange}
             />
           </label>
-          <button
-            className="btn btn-danger btn-sm"
-            type="submit"
-            value="Submit"
-          >
+          <button className="btn btn-dark btn-sm" type="submit" value="Submit">
             Додати
           </button>
         </form>
